@@ -1,0 +1,35 @@
+{% extends "bookings/layout.html" %}
+
+
+{% block content %}
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <div class="alert {{message.tags}} m-2" id="msg" role="alert">
+        {{ message }}
+    </div>    
+    {% endfor %} 
+  </ul>
+  {% endif %}
+<div style="position:relative;top:30px;left:10px;" >
+  <h1>
+  Artist Information
+  </h1>
+</div>
+
+<h6>  
+<div style="position:relative;top:40px;">   
+        <div style="font-size:50px;font-family:impact;position:relative;bottom:10px;" >{{ artist.name }} </div>
+        <div style="font-size:35px;font-family:impact;position:relative;bottom:0px;">{{ artist.description }}</div>
+        <div style="font-size:35px;font-family:impact;position:relative;bottom:0px;">{{ artist.rider }}</div>
+   <div style="position:relative;top:170px;left:20px;" > 
+      <a class="button" href="{% url 'calendar_data' pk=artist.pk %}" style="position:relative;left:100px;">Calendar</a>
+      <a class="button" href="{% url 'update_artist' pk=artist.pk %}" style="position:relative;left:100px;">Update</a>
+   </div>  
+   <div style="position:relative;left:210px;bottom:75px;">
+      <a class="button-close" href="{% url 'eliminate_artist' pk=artist.pk %}" style= "position:relative;bottom:150px;left:300px;">x</a>
+   </div>   
+</div>   
+</h6>
+
+{% endblock %}

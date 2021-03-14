@@ -1,0 +1,46 @@
+{% extends "bookings/layout.html" %}
+{% block content %}
+
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <div class="alert {{message.tags}} m-2" id="msg" role="alert">
+      {{ message }}
+  </div>    
+  {% endfor %} 
+</ul>
+{% endif %}
+
+<h6>
+<div class="form-group" style= "position:relative;top:40px;left:50px;">
+ <form method='POST' enctype="multipart/form-data"> 
+      {% csrf_token %}
+      {{ form.as_p }}
+    <div style="position:relative;bottom:20px;">
+       <input class='button' type='submit' style= "position:relative;top:70px;" value='Add Artist'/>  
+    </div>      
+ </form>
+</div>
+</h6>
+
+
+<script type="text/javascript">
+     var formSubmitting = false;
+     var setFormSubmitting = function() { formSubmitting = true; };
+  
+     window.onload = function() {
+     window.addEventListener("beforeunload", function (e) {
+          if (formSubmitting==false) {
+              return undefined;
+          }
+  
+          var confirmationMessage = 'It looks like you have been editing something. '
+                                  + 'If you leave before saving, your changes will be lost.';
+  
+          (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+          return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+      });
+  };
+  </script>
+
+{% endblock %}

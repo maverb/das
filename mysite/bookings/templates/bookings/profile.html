@@ -1,0 +1,20 @@
+{% extends "bookings/layout.html" %}
+
+{% block content %}
+<div>  
+     <h6>
+     <div style="position:relative;top:70px;left:50px;">   
+         <div style="font-size:50px;font-family:impact;position:relative;bottom:35px;">{{ artist.name }}</div>
+         <p> {{ artist.description }}</p>
+         <div style="position:relative;top:135px;left:320px;" >
+         <p> {{ artist.rider }}</p>
+        </div>
+         {% if artist not in roster %}
+            <a class="button" href="{% url 'booking_offer' pk=artist.pk %}" style="position:relative;top:70px;"> book it</a> 
+         {% endif %}   
+     </div>  
+     </h6>
+</div>
+
+
+{% endblock %}
