@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks'
+
 ]
 
 MIDDLEWARE = [
@@ -141,3 +143,4 @@ MESSAGE_TAGS={
 MEDIA_URL= "/media/"
 MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
 
+ 
