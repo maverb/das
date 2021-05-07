@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <div class="alert {{message.tags}} m-2" id="msg" role="alert">
+        {{ message }}
+    </div>    
+    {% endfor %} 
+  </ul>
+  {% endif %}
+<div class="title">
+  <h1>
+  Artist Information
+  </h1>
+</div>
+
+<div class="container-profile">  
+  <div class="info">   
+      <div id="name-bookit">
+         {{ artist.name }}
+      </div>
+      <div class="artist-description">
+         <p> {{ artist.description }}</p>
+      </div>
+      <div class="artist-rider" >
+      <p> {{ artist.rider }}</p>
+      </div>
+      <div class="double-buttons">
+         <a class="button" href="{% url 'calendar_data' pk=artist.pk %}">Calendar</a>
+         <a class="button" href="{% url 'update_artist' pk=artist.pk %}">Update</a>    
+      </div> 
+  </div>  
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <div class="alert {{message.tags}} m-2" id="msg" role="alert">
+        {{ message }}
+    </div>    
+    {% endfor %} 
+  </ul>
+{% endif %}
+
+<div class="container-profile">
+  <div class="info">
+       <div style="font-family:impact;font-size:1.5em;">
+        I accept the terms given by {{ off.party }}
+       </div>
+       <div style="margin-top:4em;">
+           <a class="button" href="{% url 'contract' pk=off.pk %}">Accept</a>      
+           <a class="button" href="{% url 'cancel_offer' pk=off.pk %}">Cancel</a>
+       </div>  
+  </div>  
+</div>
+
+
+{% endblock %}

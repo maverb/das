@@ -56,8 +56,8 @@
 }
 .fc-theme-standard td,
   .fc-theme-standard th {
-    border: 1px solid #ddd;
-    border: 1px solid var(--fc-border-color, #ddd);
+    border: 2px solid black;
+    border: 2px solid black;
   }
 /* for FF, which doesn't expand a 100% div within a table cell. use absolute positioning */
 /* inner-wrappers are responsible for being absolute */
@@ -298,6 +298,14 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
 .fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
     margin-left: .75em; /* space between */
   }
+@media (max-width:375px){
+  .fc-direction-ltr .fc-toolbar > * > :not(:first-child){
+       margin-left:0em;
+       margin-top:0.75;
+  }
+}  
+
+
 .fc-direction-rtl .fc-toolbar > * > :not(:first-child) {
     margin-right: .75em; /* space between */
   }
@@ -417,6 +425,8 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
 .fc .fc-view-harness {
     flex-grow: 1; /* because this harness is WITHIN the .fc's flexbox */
     position: relative;
+    border:2px solid black;
+    height:350px!important ;
   }
 .fc {
 
@@ -576,10 +586,11 @@ A HORIZONTAL event
 */
 .fc-h-event { /* allowed to be top-level */
   display: block;
-  border: 1px solid #3788d8;
-  border: 1px solid var(--fc-event-border-color, #3788d8);
-  background-color: #3788d8;
-  background-color: var(--fc-event-bg-color, #3788d8)
+  border: 2px solid black;
+  border: 2px solid black;
+  background-color: purple;
+  background-color: purple;
+  color:black!important;
 
 }
 .fc-h-event .fc-event-main {
@@ -713,7 +724,7 @@ A HORIZONTAL event
   }
 .fc .fc-daygrid-day.fc-day-today {
       background-color: rgba(255, 220, 40, 0.15);
-      background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));
+      background-color: var(--fc-today-bg-color, purple);
     }
 .fc .fc-daygrid-day-frame {
     position: relative;
@@ -740,6 +751,7 @@ A HORIZONTAL event
     position: relative;
     z-index: 4;
     padding: 4px;
+    text-decoration:none;
   }
 .fc {
 
@@ -852,11 +864,11 @@ A HORIZONTAL event
   }
 .fc-direction-ltr .fc-daygrid-event.fc-event-start,
 .fc-direction-rtl .fc-daygrid-event.fc-event-end {
-  margin-left: 2px;
+ 
 }
 .fc-direction-ltr .fc-daygrid-event.fc-event-end,
 .fc-direction-rtl .fc-daygrid-event.fc-event-start {
-  margin-right: 2px;
+ 
 }
 .fc-direction-ltr .fc-daygrid-week-number {
     left: 0;

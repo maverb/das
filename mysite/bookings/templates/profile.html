@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container-profile">  
+     <div class="info">   
+         <div id="name-bookit">
+            {{ artist.name }}
+         </div>
+         <div class="artist-description">
+            <p> {{ artist.description }}</p>
+         </div>
+         <div class="artist-rider" >
+         <p> {{ artist.rider }}</p>
+         </div>
+         {% if artist not in roster %}
+            {% if user.is_authenticated %}
+              <a class="button" id="bookit" href="{% url 'booking_offer' pk=artist.pk %}"> book it</a> 
+            {% else %}
+              <a class="button" id="bookit" href="{% url 'login' %}"> book it</a> 
+            {% endif %}  
+         {% endif %}   
+     </div>  
+</div>
+
+
+{% endblock %}

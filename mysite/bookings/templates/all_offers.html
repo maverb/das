@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  {% if messages %}
+  <ul class="messages">
+     {% for message in messages %}
+  <div class="alert {{message.tags}} m-2" id="msg" role="alert">
+      {{ message }}
+  </div>    
+  {% endfor %} 
+  </ul>
+  {% endif %}
+ 
+{% for off in all_offers %}
+   {% if off.artist in roster %}  
+     <div class="container-profile">  
+         <div class="info-event">   
+               <div class="offer-info">
+                  <div id="name-bookit">
+                     {{ off.artist.name }}
+                  </div>
+                  <div>
+                     Interested: 
+                     {{ off.party }}
+                  </div>
+                  <div>
+                     Date: 
+                     {{ off.date }}
+                  </div>
+                  <div>
+                     Fee: 
+                     ${{ off.fee }}
+                  </div>
+                  <div>
+                     Hosting:
+                     ${{ off.hosting }}
+                  </div> 
+               </div>   
+               <div class="double-buttons">
+                  <a class="button" href="{% url 'accept_offer' pk=off.pk %}">Accept</a>
+                  <a class="button" href="{% url 'cancel_offer' pk=off.pk %}" >Cancel</a>  
+               </div>  
+         </div>  
+     </div>                  
+   {% endif %}              
+{% endfor %}
+
+      <div class=container-pagination>
+         <ul class="pagination">
+            <li class="page-item">
+               {% if p.has_previous %}
+                  <a class="previous round" href="{% url 'all_offers' %}?page={{p.previous_page_number}}">&#8249;</a>
+               {% endif %} 
+            </li>
+            <li class="page-item">
+               {% if p.has_next %}
+                  <a class="next round" href="{% url 'all_offers' %}?page={{p.next_page_number}}">&#8250;</a> 
+               {% endif %}
+            </li>
+         </ul>
+      </div> 
+</div>
+   
+{% endblock %}

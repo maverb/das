@@ -19,7 +19,7 @@ class Artist(models.Model):
 #This is the table for offer 
 class Offer(models.Model):
    party=models.CharField(max_length=200)
-   date=models.DateField("day of the party")
+   date=models.DateField("day")
    fee=models.IntegerField(default=0)
    #food and hotel expenses if necessary 
    hosting=models.IntegerField(default=0) 

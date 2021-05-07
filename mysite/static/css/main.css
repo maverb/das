@@ -1,13 +1,303 @@
+.navbar-toggler-icon{
+ color:black;
+}
+
+.btn-outline-success{
+  color:black;
+  border-color:black;
+
+}
+
+.button-search{
+  color: black!important;
+  background-color: white!important;
+  border:3px solid black!important; 
+}
+
+.button-search:hover{
+  color: white!important;
+  background-color: black!important;
+  border:3px solid black!important;
+}
+
+.form-control{
+  border: 3px solid black;
+  color:black!important;
+  outline:none!important;
+  padding:0!important;
+  outline:none;
+}
+.form-control:focus {
+  color:black;
+  border:black solid 3px;
+  outline: none;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border: 3px solid black;
+  
+}
+
+input:focus {
+  color:black!important;
+  
+}
+
+input[type="file"]{
+  max-width:15em;
+  border:1px solid white;
+}
+
+input[name="photo"]{
+  max-width:15em;
+  border:3px solid white;
+  outline:0;
+}
+
+input[class="form-control"]:focus {
+  outline:0;
+}
+
+input[name="photo"]:focus{
+  outline:0;
+  border:3px solid white;
+}
+
+.navbar-light .navbar-toggler{
+  color:black;
+  border-color:black;
+}
+.avatarImage {
+    vertical-align: middle;
+    width: 7em;
+    height: 7em;
+    border-radius: 50%;
+    border:3px solid black;
+    margin: 10px;
+} 
+
+.container{
+  max-width:100% ;
+}
+
+
+@media (min-width:605px){
+  .container{
+    max-width:70%;
+  }
+}
+
+
+
+.container #name-artist:hover{
+  color:white;
+}
+
+#bookit:hover{
+  color:white;
+  text-decoration:none ;
+}
+
+.navbar-light .navbar-nav .nav-link{
+  color:black;
+}
+
+#name-bookit{
+   font-family:Impact;
+   font-size:2em;
+}
+
+.alert-success{
+  font-family:impact;
+  color:white;
+  background-color:purple ;
+  border-color: 5px solid black;
+}
+
+.info-event{
+  height: 300px;
+  position: relative;
+  top: 2em;
+  max-width: 20%;
+  min-width: 70%;
+  margin-bottom:18em;
+  font-family:impact;
+}
+
+@media (max-width:420px){  
+  .container-profile{
+    max-width:90%;
+    margin-left:1em;
+    margin-right:1em;
+  } 
+} 
+
+.info{
+    height: 300px;
+    position: relative;
+    top: 2em;
+    padding:10px;
+    max-width:50%;
+    min-width:70%;
+    margin-bottom:10em;
+}
+
+.title{
+  margin-left:1em;
+  margin-top: 2em;
+  margin-bottom: 3em;
+}
+
+.container-pagination{
+  margin-top:1em;
+  margin-left:5em;
+}
+
+.double-buttons{
+  display:flex;
+  margin-top:3em;
+  margin-bottom:8em;
+}
+
+.container-double{
+  border: 5px solid black;
+  max-width:50%;
+  margin-bottom:2em;
+  margin-top:3em ;
+  margin-left:3em;
+  box-shadow: 5px 10px #888888;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+}
+
+.info-buttons{
+  height: 300px;
+  position: relative;
+  top: 2em;
+  padding:10px;
+  max-width:50%;
+  min-width:70%;
+  margin-bottom:5em;
+
+}
+
+#add-button{
+  margin-top:2em;
+}
+
+ .container-profile{
+    border: 5px solid black;
+    max-width:50%;
+    min-width:18em;
+    margin-top:2em;
+    margin-bottom:2em;
+    margin-left:1em;
+    margin-right:3em;
+    box-shadow: 5px 10px #888888;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+
+.offer-info{
+  font-family:Impact;
+  font-size:1.5em;
+}
+
+@media (max-width: 860px){  
+  .avatarImage {
+    width: 5em;
+    height: 5em;
+  } 
+}
+
+.bg-light{
+  background-color:white!important ;
+}
+
+.nav-link{
+  font-family: 'Bebas Neue', cursive;
+  font-size:1.5em;
+}
+
+.content {
+  border: 5px solid black;
+  /* height: 200px; */
+  padding: 20px;
+  position: relative;
+  min-width: 70%;
+  max-width:70%;
+  margin-top: 5px;
+  box-shadow: 5px 10px #888888;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+
+   
+}
+
+@media (max-width: 600px){
+
+  .content{
+      flex-direction: column-reverse;
+      justify-content:center;
+      align-items: center;
+  }
+  .double-buttons{
+    flex-direction:column-reverse;
+    justify-content:center;
+    align-items:center ;
+  }
+} 
+
+@media (max-width:800px){
+
+  .double-buttons{
+    flex-direction:column-reverse;
+    justify-content:center;
+    align-items:center ;
+  }
+} 
+
+.content:hover{
+  background-color: black;
+  box-shadow:5px 10px #red;
+  color:white;
+}
+
+.column{
+  display:flex;
+  flex-direction:column;
+  min-width:80%;
+  margin:50px 0 0;
+}
+
+.artist-name{
+   font-family: 'Bebas Neue', cursive;
+   font-size:1em;
+   text-decoration:none;
+}
+
+.artist-name:hover{
+  color:white;
+  font-family: 'Bebas Neue', cursive;
+  font-size:1em;
+  text-decoration:none;
+}
+
+
 body{
      background: #ffffff;
      color: #000001;
-     margin-top: 5rem;
     }
   
 p{
   color:#000001;
   font-family:Impact,fantasy;
-  font-size:25px;
+  font-size:1.2em;
   }    
 
 .header{
@@ -22,16 +312,6 @@ h1{
     font-size:30px;
   }
 
-
-h6 {
-    border: 5px solid black;
-    height: 500px;
-    padding: 15px 50px 75px 110px;
-    position: relative;
-    top: 51px;
-    left:165px;
-   }
-
 h3{
     color:#5bc1a4;
     font-family:Impact,fantasy;
@@ -45,17 +325,15 @@ h4{
     font-size:30px;
   }
 
-h5 {
-    border: 5px solid black;
-    height: 200px;
-    padding: 15px 50px 75px 110px;
-    position: relative;
-    top: 51px;
-    left:165px;
-   }
+#calendar{
+  max-width:90%;
+  font-family:impact;
+  padding-left:2em ;
+  padding-top:1em;
+}
 
 .button {
-    background-color: #5bc1a4; 
+    background-color:purple; 
     border: none;
     color: black;
     padding: 15px 32px;
@@ -65,7 +343,17 @@ h5 {
     display: inline-block;
     font-size: 16px;
     border: 5px solid black;
+    box-shadow: 5px 10px yellow;
+    text-decoration:none ;
+    margin-bottom:1em;
+    margin-right:1em;
   }
+
+.button:hover{
+  color:white;
+  text-decoration:none;
+}
+
 .button-close {
     background-color: black; 
     border: none;
@@ -102,22 +390,37 @@ h5 {
     font-size: 16px;
 }
 
+nav{
+  
+    border-bottom: 5px solid black;
+}
+
 .bg-steel {
     background-color:#ffffff;
     border-bottom: 5px solid black;
   }
-  
+
+.btn-outline-success{
+ font-family: 'Bebas Neue', cursive;
+ color:black; 
+ border-color:black;
+}
+
+.btn-outline-success:hover{
+  background-color: black;
+}
+
 .site-header .navbar-nav .nav-link {
     color: #000001;
-  }
+}
   
 .site-header .navbar-nav .nav-link:hover {
     color: #ffffff;
-  }
+}
   
-  .site-header .navbar-nav .nav-link.active {
+.site-header .navbar-nav .nav-link.active {
     font-weight: 500;
-  }
+}
   
 .content-section {
     background: #ffffff;
@@ -135,6 +438,7 @@ a.article-title:hover {
     color: #000001;
     text-decoration: none;
 }
+
 a{
   color:black;
   background-color: transparent;
@@ -177,14 +481,7 @@ a{
 .account-heading {
     font-size: 2.5rem;
 }
-  
-.logo {
-        height: 50px;
-        padding-right: 15px;
-        padding-left: 20px;
-        
-}
-  
+
 .btn-primary {
     color: #212529;
     background-color: #000;
@@ -213,25 +510,19 @@ img {
     height: auto;
 }
 
-.avatarImage {
-    vertical-align: middle;
-    width: 125px;
-    height: 125px;
-    border-radius: 50%;
-    border:3px solid black;
-    margin: 10px;
-} 
-
 a {
-    text-decoration: none;
+    text-decoration:none;
     display: inline-block;
     padding: 8px 16px;
+
   }
+
+a:hover{
+  color:white;
+  text-decoration:none;
+}  
   
-a:hover {
-    background-color: #ddd;
-    color: black;
-  }
+
   
 .previous {
     background-color: #f1f1f1;
@@ -241,6 +532,7 @@ a:hover {
 .next {
     background-color: black;
     color: white;
+    text-decoration:none;
   }
   
 .round {
@@ -256,7 +548,6 @@ a:hover {
     display: inline-block;
     border-radius: 2px;
   }
-  
   
 .notification .badge {
     position: absolute;

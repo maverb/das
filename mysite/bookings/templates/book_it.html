@@ -1,4 +1,4 @@
-{% extends "bookings/layout.html" %}
+{% extends "layout.html" %}
 
 {% block content %}
   {% if messages %}
@@ -11,19 +11,21 @@
   </ul>
   {% endif %}
 
-  <h6>
-  <div style="position:relative;top:95px;left:50px;">  
-    <form method='POST'> 
-     <div style="position:relative;bottom:40px;">   
-     {% csrf_token %}
-     {{ form.as_p }}
-     <input class='button' type='submit' value='Send Offer'/> 
-    </form>
-  </div>
-  </h6> 
+  <div class="mb-3">  
+     <div class="container-profile">
+       <div class="info-event">
+         <form method='POST'>  
+          {% csrf_token %}
+             <h6>{{ form.as_p }}</h6>
+          <input class='button' type='submit' value='Send Offer'/> 
+         </form>
+       </div>  
+     </div>
+  </div>    
+  
 
 
-  <script type="text/javascript">
+<script type="text/javascript">
     var formSubmitting = false;
     var setFormSubmitting = function() { formSubmitting = true; };
  

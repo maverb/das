@@ -1,4 +1,4 @@
-{% extends "bookings/layout.html" %}
+{% extends "layout.html" %}
 
 
 {% block content %}
@@ -11,20 +11,25 @@
     {% endfor %} 
   </ul>
   {% endif %}
+
+
+
 <div style="position:relative;top:30px;left:10px;" >
   <h1>
   Artist Information
   </h1>
 </div>
 
-<h6>  
-<div style="position:relative;top:40px;">   
-  <form method='POST' enctype="multipart/form-data"> {% csrf_token %}
-  {{ form.as_p }}
-  <input class='button' type='submit' style= "position:relative;top:70px;" value='Update'/>   
-  </form>
+
+<div class="container-profile">   
+    <div class="info-event">
+       <form method='POST' enctype="multipart/form-data"> {% csrf_token %}
+       {{ form.as_p }}
+       <input class='button' type='submit' value='Update'/>   
+       </form>
+    </div>   
 </div>   
-</h6>
+
 
 
 

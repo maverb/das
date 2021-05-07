@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <div class="alert {{message.tags}} m-2" id="msg" role="alert">
+      {{ message }}
+  </div>    
+  {% endfor %} 
+</ul>
+{% endif %}
+
+
+<div> 
+    <div class="title"> 
+          <h1>Your Artists </h1>
+    </div> 
+    <div class="container">
+        {% for ar in p %}
+          {% if ar in roster %}
+          <div class="content">
+             <a class="artist-name" id="name-artist" href="{% url 'artist_info' pk=ar.pk %}">{{ ar.name }}</a>
+             {% if ar.photo %}
+             <img src="{{ ar.photo.url }}" width="100" height="100" class="avatarImage" /> 
+             {% endif %}  
+          </div>
+          {% endif %}
+        {% endfor %}
+        <div class=container-pagination>
+           <ul class="pagination">
+                <li class="page-item">
+                   {% if p.has_previous %}
+                         <a class="previous round" href="{% url 'user_profile' %}?page={{p.previous_page_number}}">&#8249;</a>
+                   {% endif %} 
+                </li>
+                <li class="page-item">
+                    {% if p.has_next %}
+                         <a class="next round" href="{% url 'user_profile' %}?page={{p.next_page_number}}">&#8250;</a> 
+                    {% endif %}
+                </li>
+           </ul>
+        </div> 
+    </div>          
+</div>
+{% endblock %}

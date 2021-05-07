@@ -1,4 +1,4 @@
-{% extends "bookings/layout.html" %}
+{% extends "layout.html" %}
 {% load static %}
 
 
@@ -8,7 +8,7 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'fullcalendar/lib/main.css' %}">
 
-<div style= "position:relative;left:115px;top:70px;" >
+<div>
   <div id="calendar">
     <script src="{% static 'fullcalendar/lib/main.js' %}"></script>
     <script>
@@ -19,10 +19,11 @@
                  {% if all_offers %}
                      {% for off in all_offers %}
                          {% if off.accepted is True %}
-                               {
+                               { 
                                 title:"{{off.party}}",
                                 start:"{{off.date | date:'Y-m-d' }}",
                                 end:"{{off.date | date:'Y-m-d' }}",
+                                url:"{% url 'event_data' pk=off.pk %}",
                                },
                          {% endif %} 
                      {% endfor %}

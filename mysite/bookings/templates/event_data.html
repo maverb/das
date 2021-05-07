@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <div class="alert {{message.tags}} m-2" id="msg" role="alert">
+      {{ message }}
+  </div>    
+  {% endfor %} 
+</ul>
+{% endif %}
+
+<div class="container-profile">  
+    <div class="info-event">   
+          <div class="offer-info">
+             <div id="name-bookit">
+                {{ offer.artist.name }}
+             </div>
+             <div>
+                Party: 
+                {{ offer.party }}
+             </div>
+             <div>
+                Date: 
+                {{ offer.date }}
+             </div>
+             <div>
+                Fee: 
+                ${{ offer.fee }}
+             </div>
+             <div>
+                Hosting:
+                ${{ offer.hosting }}
+             </div> 
+          </div>   
+    </div>  
+</div>                  
+
+{% endblock %}

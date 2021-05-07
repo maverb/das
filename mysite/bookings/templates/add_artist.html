@@ -1,4 +1,4 @@
-{% extends "bookings/layout.html" %}
+{% extends "layout.html" %}
 {% block content %}
 
 {% if messages %}
@@ -11,18 +11,21 @@
 </ul>
 {% endif %}
 
-<h6>
-<div class="form-group" style= "position:relative;top:40px;left:50px;">
- <form method='POST' enctype="multipart/form-data"> 
-      {% csrf_token %}
-      {{ form.as_p }}
-    <div style="position:relative;bottom:20px;">
-       <input class='button' type='submit' style= "position:relative;top:70px;" value='Add Artist'/>  
-    </div>      
- </form>
-</div>
-</h6>
 
+<div class="mb-3">
+   <div class="container-profile">
+     <div class="info-event">
+       <form method='POST' enctype="multipart/form-data">  
+        {% csrf_token %}
+           <h6>{{ form.as_p }}</h6> 
+        <input class='button' type='submit' value='Add artist'/> 
+       </form>
+     </div>  
+   </div>
+</div>   
+
+
+<!-- before unload to notify the user that the data will be lost -->
 
 <script type="text/javascript">
      var formSubmitting = false;
@@ -40,7 +43,8 @@
           (e || window.event).returnValue = confirmationMessage; //Gecko + IE
           return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
       });
-  };
+    };
+
   </script>
 
 {% endblock %}

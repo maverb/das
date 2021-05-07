@@ -15,11 +15,9 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 
 
-@login_required
-
-
-
+#index view with all the artists available in the platform
 def index (request):
+    #this variable queries all the artists in the database
     artist_name=Artist.objects.all()
     paginator=Paginator(artist_name,7)
     page=request.GET.get('page',1)
@@ -29,20 +27,14 @@ def index (request):
        p=pagintor.page(1)
     except EmptyPage:   
        p=paginator.page(paginator.num_pages)
-
     context={
           'page': page,
           'p': p,
           'artist_name': artist_name,
     }
-    return render(request,'bookings/index.html',context)
+    return render(request,'index.html',context)
 
-def home(request):
-  context={
-
-  }
-  return render(request,'bookings/home.html',context) 
-
+#profile view for every single artist in the platform
 def profile (request,pk=None):
     user=request.user
     user_id=user.id
@@ -55,11 +47,15 @@ def profile (request,pk=None):
         'artist': artist,
         'roster':roster,
     } 
-    return render(request,'bookings/profile.html', args)    
+    return render(request,'profile.html', args)    
 
+#send offer is a view for sending contract offers to the artist or agency
 def send_offer(request,pk=None):
+     #using the offer form 
      form=OfferForm(request.POST or None)
+     #artist_relation is a variable that let us relate the offer with the artist for saving matters
      artist_relation=Artist.objects.get(id=pk) 
+     #once the offer is sent
      if form.is_valid():
        a=artist_relation.offer_set.create(
          party = form.cleaned_data['party'],
@@ -67,27 +63,29 @@ def send_offer(request,pk=None):
          fee = form.cleaned_data['fee'],
          hosting = form.cleaned_data['hosting'],
        )
+       artist_relation.save()
        messages.success(request,'You sent your offer')
-       return HttpResponseRedirect('/bookings/')
+       return HttpResponseRedirect('/')
      context={
        'form':form,
      }  
-     return render(request,'bookings/book_it.html',context) 
+     return render(request,'book_it.html',context) 
 
+#just a regular log in page
 @csrf_exempt
 def loginPage(request):
-  ur=request.user
-  roster=Artist.objects.filter(user=ur.id)
+  #the context is empty before the log in
   context={
-    'ur':ur,
-    'roster':roster,
   } 
+  #getting the data from the form in the log in page
   if request.method=='POST':
     username=request.POST.get('username')
     password=request.POST.get('password')
+    #authenticating the user
     user=authenticate(request,username=username,password=password)
     if user is not None:
       ur=request.user
+      #querying all the artists in the platform
       all_artist=Artist.objects.all()
       paginator=Paginator(all_artist,6)
       page=request.GET.get('page',1)
@@ -104,26 +102,31 @@ def loginPage(request):
           'p':p,
       } 
       login(request,user)
-      return render(request,'bookings/index.html', context)
+      return render(request,'index.html', context)
     else:
       messages.warning(request,'Incorrect user or password')    
-  return render(request,'bookings/login.html', context)
+  return render(request,'login.html', context)
 
+#just a regular register page
 def register(request):
   form=CreateUserForm(request.POST or None)
+  #validating the form to evaluate if it has any error 
   if form.is_valid():
     form.save()
     messages.success(request,'Your account was created!')
-    return redirect('login')
+    return redirect('login') 
   context={
         'form':form
   } 
-  return render(request,'bookings/register.html',context) 
+  return render(request,'register.html',context) 
 
+#view that contains all the artists that the USER has created
 @csrf_exempt
 @login_required
 def user_profile(request):
+  #requesting the user to load the data
   ur=request.user
+  #filtering the artists that the user created
   roster=Artist.objects.filter(user=ur.id)
   paginator=Paginator(roster,6)
   page=request.GET.get('page',1)
@@ -139,13 +142,16 @@ def user_profile(request):
       'page':page,
       'p':p,
   }
-  return render(request,'bookings/user_profile.html' , context) 
+  return render(request,'user_profile.html' , context) 
 
+#a view to handle all the offers that the artists of the user received 
 @csrf_exempt
 @login_required
 def booking_request(request):
   user=request.user
+  #filtering the artists that the user created
   roster=Artist.objects.filter(user=user.id)
+  #filtering all the offers that were not accepted at that given moment
   all_offers=Offer.objects.filter(accepted=False)
   paginator=Paginator(all_offers,4)
   page=request.GET.get('page',1)
@@ -161,17 +167,21 @@ def booking_request(request):
       'page':page,
       'p':p,
   }
-  return render(request,'bookings/chat.html',context)
+  return render(request,'all_offers.html',context)
 
+#a view to handle the creation of a new artist
 @login_required
 def add_artist(request):
   form=ArtistForm(request.POST or None,request.FILES or None) 
   user=request.user
+  #establishing the relation between the artist and the user
   user_relation=User.objects.get(id=user.id) 
+  #filtering the roster
   roster=Artist.objects.filter(user=user.id)
   context={
        'form':form  
   }
+  #validating and saving the form 
   if form.is_valid():
        a=user_relation.artist_set.create(
          name = form.cleaned_data['name'],
@@ -180,9 +190,10 @@ def add_artist(request):
          photo=request.FILES['photo']
        )
        messages.success(request,'You just added a new artist')
-       return HttpResponseRedirect('/bookings/user_profile')    
-  return render(request,'bookings/add_artist.html',context)
+       return HttpResponseRedirect('/user_profile')    
+  return render(request,'add_artist.html',context)
 
+#a view to handle the initial information and the calendar of each artist created by the user
 @login_required
 def artist_info(request,pk=None):
   if pk:
@@ -192,21 +203,23 @@ def artist_info(request,pk=None):
   context={
       'artist':artist
   }    
-  return render(request,'bookings/artist_info.html',context)
+  return render(request,'artist_info.html',context)
 
+#a view to handle the actualization of the artist information
 @login_required
 def update_artist(request,pk=None): 
   if pk:
       artist=Artist.objects.get(pk=pk)
   else:
       artist=request.artist   
+  #we are going to need the artist form later    
   form=ArtistForm(request.POST or None,request.FILES or None,instance=artist)
   user=request.user   
   all_offers=Offer.objects.filter(artist_id=pk) 
   arg={
      'user':user
   }
-  #updating throw the form
+  #updating throw the form after running the validation
   if form.is_valid():
     artist=form.save(commit=False)
     artist.save()
@@ -217,37 +230,39 @@ def update_artist(request,pk=None):
         'all_offers':all_offers,
         'artist':artist,
   }  
-  return render(request,'bookings/update_artist.html',context)
+  return render(request,'update_artist.html',context)
 
+#a view to handle the deletion of a given artist 
 @login_required
 def eliminate_artist(request,pk=None):
   user=request.user
   roster=Artist.objects.filter(user=user.id)
-  elim=Artist.objects.get(pk=pk)
-  #puede ser que se webee cuando no hay ofertsa
-  elim_offer=elim.offer_set.all()
-  #si hae el query y si elimina
-  elim.delete()
-  elim_offer.delete()
+  eliminate=Artist.objects.get(pk=pk)
+  #deliting the offers that were done for this artist
+  eliminate_offer=eliminate.offer_set.all()
+  eliminate.delete()
+  eliminate_offer.delete()
   messages.success(request,'Artist deleted')
-  return HttpResponseRedirect('/bookings/user_profile')
+  return HttpResponseRedirect('/user_profile')
 
+#a view to handle the log out
 @login_required
 def logout(request): 
    django_logout(request)
    context={
    }
-   #return render(request,"bookings/home.html",context)
-   return HttpResponseRedirect('/bookings/login')
-   
+   return HttpResponseRedirect('/')
+
+#a view to handle the acceptance of each offer   
 @login_required
 def accept_offer(request,pk=None):
    off=Offer.objects.get(pk=pk)
    context={
      'off':off,
    }
-   return render(request,'bookings/accept_offer.html',context)
-   
+   return render(request,'accept_offer.html',context)
+
+#a view to handle the confirmation of the acceptance    
 @login_required 
 def contract(request,pk=None):
   all_offers=Offer.objects.all()
@@ -267,13 +282,13 @@ def contract(request,pk=None):
     'roster':roster,
     'all_offers':all_offers,
   }
-  #return render(request,'bookings/chat.html',context)
-  return HttpResponseRedirect('/bookings/all_offers')
+  return HttpResponseRedirect('/all_offers')
 
+#a view to handle the cancelation of each offer
 @login_required
 def cancel_offer(request,pk=None):
   all_offers=Offer.objects.all()
-  #delete an offer 
+  #delete the offer 
   eliminate=Offer.objects.get(pk=pk) 
   eliminate.delete()
   user=request.user
@@ -284,17 +299,19 @@ def cancel_offer(request,pk=None):
     'roster':roster,
     'all_offers':all_offers 
   }
-  return HttpResponseRedirect('/bookings/all_offers')
+  return HttpResponseRedirect('/all_offers')
 
+#a view to handle the search bar 
 def artist_search(request):
-  if request.method=='GET':
-    search=request.GET.get('search')
+  if request.method=='POST':
+    search=request.POST.get('search')
     artist_founded=Artist.objects.all().filter(name=search) 
   context={
       'artist_founded':artist_founded,
   }
-  return render(request,'bookings/artist_search.html',context)
+  return render(request,'artist_search.html',context)
 
+#a view to handle the calendar with the gigs that every artist have setted
 def calendar_data(request,pk=None):
     artist=Artist.objects.get(pk=pk)
     all_offers=Offer.objects.filter(artist_id=pk)
@@ -302,7 +319,14 @@ def calendar_data(request,pk=None):
          'artist':artist,
          'all_offers':all_offers,
     }
-    return render(request,'bookings/calendar_data.html',context)   
+    return render(request,'calendar_data.html',context)   
 
+#a view to handle the specific of the gigs placed in the calendar
+def event_data(request,pk=None):
+  offer=Offer.objects.get(id=pk) 
+  context={
+    'offer':offer,
+  }
+  return render(request,'event_data.html',context)
 
- 
+  
