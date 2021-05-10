@@ -1,5 +1,9 @@
 Platform to deal with bookings within the live entertainment industry built in Python3(django),Css,Html,Javascript and SQLite.
 
+I really recommend to checkout the video for a better understanding of the platform.
+
+https://youtu.be/3K5ksLP6Ks4
+
 
 How it works?
 
